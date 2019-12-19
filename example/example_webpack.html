@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <script type="module" src="example_client_webpacked.js"></script>    
+    <link rel="stylesheet" type="text/css" href="https://snap-api.tradepending.com/stylesheets/snap-typeahead.css">
+  </head>
+  <body>
+    <div class="card col-md-12">
+      <div class="card-body">
+        <div>
+          <span>API Endpoint: __api_url__</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card col-md-12">
+      <div class="card-body">
+        <div class="card-title" data-toggle="collapse" data-target="#typeahead" aria-expanded="false">
+          SNAP Typeahead <span class="fa fa-caret-down"></span>
+        </div>
+        <div id="typeahead" class="">
+          <div class="snap-typeahead">
+            <input id="vehicle" type="text" placeholder="Enter your Year Make Model Trim"></input>
+          </div>
+          <div class="typeahead-next"></div>
+          <div class="typeahead-result result"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
