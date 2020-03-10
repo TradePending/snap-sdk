@@ -54,7 +54,7 @@
 
 	/* WEBPACK VAR INJECTION */(function($) {$(document).ready(function(){
 	  let snap;
-	  
+
 	  if (true) {
 	    // using webpack
 	    snap = __webpack_require__(3);
@@ -62,15 +62,16 @@
 	    // using <script> to include the sdk.
 	    snap = window.SNAP;
 	  }
-	  
-	  const addReport = function(selector, partnerId, dealerId, vehicle) {
+
+	  const addReport = function(selector, partnerId, dealerUrl, vehicle, zip_code) {
+	    let options = {};
 	    $("<hr>").appendTo(selector);
 	    let ul = $("<ul>").appendTo(selector);
-	    
-	    let reportUrl = snap.get_report_url(partnerId, dealerId, vehicle);
+
+	    let reportUrl = snap.get_report_url(partnerId, dealerUrl, vehicle, zip_code, options);
 	    $("<li>").html("<a target='_blank' href='" + reportUrl + "'>" + reportUrl + "</a>").appendTo(ul);
-	    
-	    snap.get_report(partnerId, dealerId, vehicle, {}, function(err, result) {
+
+	    snap.get_report(partnerId, dealerUrl, vehicle, options, zip_code, options, function(err, result) {
 	      if (err) {
 	        console.log(err);
 	      } else {
@@ -122,6 +123,7 @@
 
 	  let apiUrl = "__api_url__";
 	  let dealerId = "__dealer_id__";
+	  let dealerUrl = "__dealer_url__";
 	  let partnerId = "__partner_id__";
 
 	  snap.set_api_url(apiUrl);
@@ -137,11 +139,12 @@
 	        return alert(err);
 	      } else {
 	        updateVehicle(".typeahead-result", vehicle);
-	        addReport(".typeahead-result", partnerId, dealerId, vehicle);
+	        let zip_code = $("#zip_code").val()
+	        addReport(".typeahead-result", partnerId, dealerUrl, vehicle, zip_code);
 	      }
 	    });
 	  });
-	  
+
 	});
 
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
@@ -10770,7 +10773,7 @@
 	  SNAP = {
 	    snap_api_url: "https://snap-api.tradepending.com",
 	    elasticsearch_url: 'https://snap-api.tradepending.com/api/v4/search',
-	    
+
 	    set_api_url: function(url) {
 	      if ((url != null ? url.length : void 0) > 0) {
 	        return this.snap_api_url = url;
@@ -11016,17 +11019,16 @@
 	        }
 	      });
 	    },
-	    get_report_url: function(partner_id, dealer_id, vehicle, options) {
+	    get_report_url: function(partner_id, dealer_url, vehicle, zip_code, options) {
 	      var params, url;
-	      params = build_report_params(partner_id, dealer_id, vehicle, options);
-	      url = this.snap_api_url + '/report?' + $.param(params);
+	      params = build_report_params(partner_id, dealer_url, vehicle, zip_code, options);
+	      url = this.snap_api_url + '/api/v4/report-html?' + $.param(params);
 	      console.log("get_report_url: " + url);
 	      return url;
 	    },
-	    get_report: function(partner_id, dealer_id, vehicle, options, callback) {
+	    get_report: function(partner_id, dealer_url, vehicle, zip_code, options, callback) {
 	      var params, url;
-	      console.log("partner: " + partner_id);
-	      params = build_report_params(partner_id, dealer_id, vehicle, options);
+	      params = build_report_params(partner_id, dealer_url, vehicle, zip_code, options);
 	      params.format = 'json';
 	      url = this.snap_api_url + '/api/v4/report?' + $.param(params);
 	      console.log("get_report: " + url);
@@ -11046,13 +11048,13 @@
 	    }
 	  };
 
-	  build_report_params = function(partner_id, dealer_id, vehicle, options) {
-	    var params, _ref, _ref1;
+	  build_report_params = function(partner_id, dealer_url, vehicle, zip_code, options) {
+	    var params, _ref1;
 	    if ((partner_id == null) || partner_id.length < 1) {
 	      throw new Error("partner_id parameter is required");
 	    }
-	    if ((dealer_id == null) || dealer_id.length < 1) {
-	      throw new Error("dealer_id parameter is required");
+	    if ((dealer_url == null) || dealer_url.length < 1) {
+	      throw new Error("dealer_url parameter is required");
 	    }
 	    if (vehicle == null) {
 	      throw new Error("vehicle parameter is required");
@@ -11060,17 +11062,19 @@
 	    if ((vehicle != null ? vehicle.id : void 0) == null) {
 	      throw new Error("No ID on vehicle. You must provide a vehicle with an ID to this method.");
 	    }
+	    if (zip_code == null || zip_code.toString().length < 5) {
+	      throw new Error("zip_code parameter is required");
+	    }
 	    params = {
 	      vehicle_id: vehicle.id,
 	      partner_id: partner_id,
-	      dealer_id: dealer_id,
-	      did: dealer_id
+	      url: dealer_url,
+	      zip_code: zip_code
 	    };
-	    if ((options != null ? (_ref = options.zip_code) != null ? _ref.length : void 0 : void 0) === 5 && !isNaN(options.zip_code)) {
-	      params.zip_code = options.zip_code;
-	    }
-	    if ((options != null ? (_ref1 = options.mileage) != null ? _ref1.length : void 0 : void 0) > 0 && !isNaN(options.mileage)) {
-	      params.mileage = parseInt(options.mileage);
+	    if (options != null) {
+	      if ((options != null ? (_ref1 = options.mileage) != null ? _ref1.length : void 0 : void 0) > 0 && !isNaN(options.mileage)) {
+	        params.mileage = parseInt(options.mileage);
+	      }
 	    }
 	    return params;
 	  };

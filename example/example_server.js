@@ -12,6 +12,7 @@ const envData = {
   "development": {
     "__api_url__": "http://localhost.tradepending.com:8080",
     "__dealer_id__": "Z75ToWR2pHHYuhZj8",
+    "__dealer_url__": "http://localtoyota.com/",
     "__partner_id__": "K6a7qr4dW6Akxes2f"
   }
 }[env];
@@ -27,9 +28,12 @@ if (process.env.DEALER_ID) {
 if (process.env.PARTNER_ID) {
   envData['__partner_id__'] = process.env.PARTNER_ID;
 }
+if (process.env.DEALER_URL) {
+  envData['__dealer_url__'] = process.env.DEALER_URL;
+}
 
-if (!envData['__dealer_id__'] || !envData['__partner_id__']) {
-  console.log("Please set env variables DEALER_ID and PARTNER_ID");
+if (!envData['__dealer_id__'] || !envData['__partner_id__'] || !envData['__dealer_url__']) {
+  console.log("Please set env variables DEALER_ID, DEALER_URL, PARTNER_ID");
   process.exit(1);
 }
 

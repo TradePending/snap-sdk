@@ -4,6 +4,7 @@ This javascript interface to TradePending's partner API.  You must have a partne
 
 # Breaking Changes from API/SDK v3
 * `partner_id` is now required as a parameter on `SNAP.configure`, `SNAP.configure_with_options`, `SNAP.next_attribute`, `SNAP.get_report_url`, `SNAP.get_report`, `SNAPes.search`, and `SNAPes.search_with_options`.
+* `dealer_url` and `zip_code` are now required parameters on `SNAP.get_report` and `SNAP.get_report_url`.
 * The `callback` provided to `SNAP.configure` and `SNAP.configure_with_options` now is called with `callback(err, vehicle)` instead of `callback(error_or_vehicle_guess_which)` for consistency and usability.  Other functions like `SNAP.next_attribute` already functioned this way since v3.
 
 
@@ -120,14 +121,14 @@ Once the vehicle has been fully identified, the `attribute` and `choices` fields
 
 Two report methods are available.
 
-* `SNAP.get_report_url(partner_id, dealer_id, vehicle, options)`:  Creates the URL used to load the standard SNAP report in a new window or iFrame.
-* `SNAP.get_report(partner_id, dealer_id, vehicle, options, callback)`: Obtains a JSON version of the report.
+* `SNAP.get_report_url(partner_id, dealer_url, vehicle, zip_code, options)`:  Creates the URL used to load the standard SNAP report in a new window or iFrame.
+* `SNAP.get_report(partner_id, dealer_url, vehicle, zip_code, options, callback)`: Obtains a JSON version of the report.
 
-* `partner_id`: your partner id provided by tradepending.
-* `dealer_id`: TradePending ID of the dealership.
-* `vehicle`: Vehicle selected using `SNAP.configure` and `SNAP.next_attribute`.  The vehicle must be fully selected (`vehicle.id` exists).
+* `partner_id`: partner id provided by tradepending.
+* `dealer_url`: URL of the dealership.
+* `vehicle`: vehicle selected using `SNAP.configure` and `SNAP.next_attribute`.  The vehicle must be fully selected (`vehicle.id` exists).
+* `zip_code`: zip code of the dealership or market where the user is looking to trade their vehicle.
 * `options`: Possible options:
-  * `zip_code`: Override the zip_code used to determine nearby vehicles. If not set, the Dealership's zip_code is used.
   * `mileage`: User entered mileage to use.
 
 

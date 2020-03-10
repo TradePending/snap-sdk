@@ -1,6 +1,6 @@
 $(document).ready(function(){
   let snap;
-  
+
   if (typeof __webpack_require__ === 'function') {
     // using webpack
     snap = require('../dist/snap-typeahead');
@@ -8,15 +8,16 @@ $(document).ready(function(){
     // using <script> to include the sdk.
     snap = window.SNAP;
   }
-  
-  const addReport = function(selector, partnerId, dealerId, vehicle) {
+
+  const addReport = function(selector, partnerId, dealerUrl, vehicle, zip_code) {
+    let options = {};
     $("<hr>").appendTo(selector);
     let ul = $("<ul>").appendTo(selector);
-    
-    let reportUrl = snap.get_report_url(partnerId, dealerId, vehicle);
+
+    let reportUrl = snap.get_report_url(partnerId, dealerUrl, vehicle, zip_code, options);
     $("<li>").html("<a target='_blank' href='" + reportUrl + "'>" + reportUrl + "</a>").appendTo(ul);
-    
-    snap.get_report(partnerId, dealerId, vehicle, {}, function(err, result) {
+
+    snap.get_report(partnerId, dealerUrl, vehicle, options, zip_code, options, function(err, result) {
       if (err) {
         console.log(err);
       } else {
@@ -68,6 +69,7 @@ $(document).ready(function(){
 
   let apiUrl = "__api_url__";
   let dealerId = "__dealer_id__";
+  let dealerUrl = "__dealer_url__";
   let partnerId = "__partner_id__";
 
   snap.set_api_url(apiUrl);
@@ -83,9 +85,10 @@ $(document).ready(function(){
         return alert(err);
       } else {
         updateVehicle(".typeahead-result", vehicle);
-        addReport(".typeahead-result", partnerId, dealerId, vehicle);
+        let zip_code = $("#zip_code").val()
+        addReport(".typeahead-result", partnerId, dealerUrl, vehicle, zip_code);
       }
     });
   });
-  
+
 });
