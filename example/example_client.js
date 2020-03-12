@@ -17,7 +17,7 @@ $(document).ready(function(){
     let reportUrl = snap.get_report_url(partnerId, dealerUrl, vehicle, zip_code, options);
     $("<li>").html("<a target='_blank' href='" + reportUrl + "'>" + reportUrl + "</a>").appendTo(ul);
 
-    snap.get_report(partnerId, dealerUrl, vehicle, options, zip_code, options, function(err, result) {
+    snap.get_report(partnerId, dealerUrl, vehicle, zip_code, options, function(err, result) {
       if (err) {
         console.log(err);
       } else {
@@ -34,7 +34,7 @@ $(document).ready(function(){
     }
   }
 
-  const completeVehicle = function(attributeSelector, partnerId, dealerId, selectedVehicle, callback) {
+  const completeVehicle = function(attributeSelector, partnerId, selectedVehicle, callback) {
     if (!selectedVehicle.id) {
       const handleAttribute = function(err, result) {
         let vehicle = result.vehicle;
@@ -54,13 +54,13 @@ $(document).ready(function(){
           $(attributeSelector + " input").click(function(e) {
             e.preventDefault();
             vehicle[attribute] = e.target.value;
-            snap.next_attribute(partnerId, dealerId, vehicle, handleAttribute);
+            snap.next_attribute(partnerId, vehicle, handleAttribute);
           });
         } else {
           callback(null, vehicle);
         }
       };
-      snap.next_attribute(partnerId, dealerId, selectedVehicle, handleAttribute);
+      snap.next_attribute(partnerId, selectedVehicle, handleAttribute);
     } else {
       callback(null, selectedVehicle);
     }
@@ -68,7 +68,6 @@ $(document).ready(function(){
 
 
   let apiUrl = "__api_url__";
-  let dealerId = "__dealer_id__";
   let dealerUrl = "__dealer_url__";
   let partnerId = "__partner_id__";
 
@@ -79,7 +78,7 @@ $(document).ready(function(){
       return alert(err);
     }
     updateVehicle(".typeahead-result", {});
-    completeVehicle(".typeahead-next", partnerId, dealerId, vehicle, function(err, vehicle) {
+    completeVehicle(".typeahead-next", partnerId, vehicle, function(err, vehicle) {
       if (err) {
         console.log(err);
         return alert(err);

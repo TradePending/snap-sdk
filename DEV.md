@@ -17,7 +17,7 @@ Overview:
 
 The example in `example/` can be used to test to make sure (some) things are working.
 
-`DEALER_ID=<dealerId> PARTNER_ID=<partnerId> node example/example/server`
+`DEALER_URL=<dealerUrl> PARTNER_ID=<partnerId> node example/example/server`
 
 [http://localhost:8081/](http://localhost:8081) is the example running the webpacked files.
 

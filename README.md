@@ -5,6 +5,7 @@ This javascript interface to TradePending's partner API.  You must have a partne
 # Breaking Changes from API/SDK v3
 * `partner_id` is now required as a parameter on `SNAP.configure`, `SNAP.configure_with_options`, `SNAP.next_attribute`, `SNAP.get_report_url`, `SNAP.get_report`, `SNAPes.search`, and `SNAPes.search_with_options`.
 * `dealer_url` and `zip_code` are now required parameters on `SNAP.get_report` and `SNAP.get_report_url`.
+* `dealer_id` is not longer a parameter for `SNAP.next_attribute`.
 * The `callback` provided to `SNAP.configure` and `SNAP.configure_with_options` now is called with `callback(err, vehicle)` instead of `callback(error_or_vehicle_guess_which)` for consistency and usability.  Other functions like `SNAP.next_attribute` already functioned this way since v3.
 
 
@@ -101,11 +102,10 @@ The `options` object must include `css_selector` and `partner_id`.  Optional opt
 After the user selects their Year/Make/Model/Trim in the autocomplete box,  there may be more vehicle attributes that are needed to sufficiently identify the vehicle.
 
 ```
-SNAP.next_attribute(partner_id, dealer_id, vehicle, callback)
+SNAP.next_attribute(partner_id, vehicle, callback)
 ```
 
 * `partner_id`: partner id provided by tradepending.
-* `dealer_id`: TradePending ID of the dealership.
 * `vehicle`: vehicle object from `SNAP.configure` or previous `SNAP.next_attribute` callbacks.
 * `callback`: Handles asking the user for the remaining vehicle attributes.
 
@@ -195,7 +195,7 @@ A simple example node server and example client is included in the `/example` di
 
 To run the example server:
 ```
-DEALER_ID=<your-dealer-id> PARTNER_ID=<your-partner-id> node example/example_server.js
+DEALER_URL=<dealer-url> PARTNER_ID=<your-partner-id> node example/example_server.js
 ```
 
 Then visit `http://locahost:8081/` in your browser to view the example.

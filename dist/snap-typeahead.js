@@ -188,11 +188,8 @@ var SNAP;
       });
       return jQuery(css_selector).focus();
     },
-    next_attribute: function(partner_id, dealer_id, vehicle, callback) {
+    next_attribute: function(partner_id, vehicle, callback) {
       var url;
-      if ((dealer_id == null) || dealer_id.length < 1) {
-        return callback(new Error("dealer_id parameter is required"));
-      }
       if (partner_id == null) {
         return callback(new Error("partner_id must be provided when configuring SNAP."));
       }
@@ -202,7 +199,6 @@ var SNAP;
       if (typeof callback !== 'function') {
         return callback(new Error("callback function is required"));
       }
-      vehicle.dealer_id = dealer_id;
       vehicle.partner_id = partner_id;
       url = ("" + this.snap_api_url + "/api/v4/select?") + $.param(vehicle);
       return $.getJSON(url, function(response) {
