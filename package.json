@@ -1,6 +1,6 @@
 {
   "name": "@tradepending/snap-sdk",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "main": "index.js",
   "license": "SEE LICENSE IN COPYRIGHT.txt",
   "homepage": "https://github.com/TradePending/snap-sdk/blob/master/README.md",
