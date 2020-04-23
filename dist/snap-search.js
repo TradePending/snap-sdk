@@ -134,7 +134,7 @@ var SNAPes;
           for (_i = 0, _len = hits.length; _i < _len; _i++) {
             hit = hits[_i];
             v = hit._source;
-            ymmt = v.year + " " + v.make + " " + v.model + " " + v.trim;
+            ymmt = v.ymm + " " + v.trim;
             car = {
               id: v.id,
               ymmt: ymmt,

@@ -10926,7 +10926,7 @@
 	                  make: v.make,
 	                  model: v.model
 	                };
-	                ymmt = v.year + " " + v.make + " " + v.model;
+	                ymmt = v.ymm;
 	                if (!ymm_only) {
 	                  ymmt += " " + v.trim;
 	                  car.trim = v.trim;
