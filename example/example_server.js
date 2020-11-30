@@ -7,10 +7,12 @@ const env = process.env.NODE_ENV || 'production';
 
 const envData = {
   "production": {
-    "__api_url__": "https://snap-api.tradepending.com"
+    "__api_url__": "https://snap-api.tradepending.com",
+    "_es_url__": "https://snap-api.tradepending.com/api/v4/search"
   },
   "development": {
     "__api_url__": "http://localhost.tradepending.com:8080",
+    "__es_url__": "http://localhost.tradepending.com:8080/api/v4/search",
     "__dealer_url__": "http://localtoyota.com/",
     "__partner_id__": "K6a7qr4dW6Akxes2f"
   }
