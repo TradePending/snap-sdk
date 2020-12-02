@@ -122,10 +122,12 @@
 
 
 	  let apiUrl = "__api_url__";
+	  let esUrl = "__es_url__";
 	  let dealerUrl = "__dealer_url__";
 	  let partnerId = "__partner_id__";
 
 	  snap.set_api_url(apiUrl);
+	  snap.set_es_url(esUrl);
 	  snap.configure(partnerId, "input#vehicle", function(err, vehicle) {
 	    if (err) {
 	      console.log(err);
