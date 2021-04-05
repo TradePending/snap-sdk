@@ -1,6 +1,6 @@
 # TradePending SDK
 
-This javascript interface to TradePending's partner API.  You must have a partner agreement with TradePending to use this library.
+This javascript interface to TradePending's partner API.  **You must have a partner agreement with TradePending to use this library.**
 
 # Breaking Changes from API/SDK v3
 * `partner_id` is now required as a parameter on `SNAP.configure`, `SNAP.configure_with_options`, `SNAP.next_attribute`, `SNAP.get_report_url`, `SNAP.get_report`, `SNAPes.search`, and `SNAPes.search_with_options`.
