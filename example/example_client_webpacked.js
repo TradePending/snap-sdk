@@ -128,7 +128,7 @@
 
 	  snap.set_api_url(apiUrl);
 	  snap.set_es_url(esUrl);
-	  snap.configure(partnerId, "input#vehicle", function(err, vehicle) {
+	  snap.configure_with_options({partner_id: partnerId, css_selector: "input#vehicle", fuzzy: true}, function(err, vehicle) {
 	    if (err) {
 	      console.log(err);
 	      return alert(err);
@@ -11064,17 +11064,19 @@
 	        partner_id: partner_id,
 	        css_selector: css_selector,
 	        include_new_cars: false,
-	        country: 'US'
+	        country: 'US',
+	        fuzzy: false
 	      }, callback);
 	    },
 	    configure_with_options: function(options, callback) {
-	      var partner_id, country, css_selector, include_new_cars, self, timeout, ymm_only;
+	      var partner_id, country, css_selector, include_new_cars, self, timeout, ymm_only, fuzzy;
 	      self = this;
 	      partner_id = options.partner_id;
 	      css_selector = options.css_selector;
 	      include_new_cars = options.include_new_cars;
 	      country = options.country;
 	      ymm_only = options.ymm_only;
+	      fuzzy = options.fuzzy;
 	      if (!partner_id) {
 	        return callback(new Error("partner_id is required"));
 	      }
@@ -11126,6 +11128,9 @@
 	                }
 	              }
 	            };
+	            if (fuzzy) {
+	              q.query.bool.must.match.ymm.fuzziness = 'AUTO:5,8'
+	            }
 	          } else {
 	            q = {
 	              size: 10,
@@ -11142,7 +11147,11 @@
 	                }
 	              }
 	            };
+	            if (fuzzy) {
+	              q.query.bool.must.match.all_fields.fuzziness = 'AUTO:5,8'
+	            }
 	          }
+	          
 	          if (!include_new_cars) {
 	            if (q.query.bool.must_not == null) {
 	              q.query.bool.must_not = [];

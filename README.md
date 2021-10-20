@@ -8,6 +8,10 @@ This javascript interface to TradePending's partner API.  **You must have a part
 * `dealer_id` is not longer a parameter for `SNAP.next_attribute`.
 * The `callback` provided to `SNAP.configure` and `SNAP.configure_with_options` now is called with `callback(err, vehicle)` instead of `callback(error_or_vehicle_guess_which)` for consistency and usability.  Other functions like `SNAP.next_attribute` already functioned this way since v3.
 
+# ChangeLog
+## v4.0.4
+Added `fuzzy` option to allow typos in search.
+
 
 # Contents
 
@@ -96,6 +100,7 @@ The `options` object must include `css_selector` and `partner_id`.  Optional opt
 * `include_new_cars`: Allow selection of new cars, not just used.  Default is false.
 * `country`: `US` or `CA`.  Default is `US`.
 * `ymm_only`: Only select year, make, model (ignore trim). Default is false.
+* `fuzzy`: Use approximate matching for make/model/trim.  Default is false.
 
 ### Additional Attributes
 
@@ -184,6 +189,7 @@ the `options` must include `search_term` and `partner_id`.  Other options are:
 * `include_new_cars`: Allow selection of new cars, not just used.  Default is false.
 * `country`: `US` or `CA`.  Default is `US`.
 * `ymm_only`: Only select year, make, model (ignore trim). Default is false.
+* `fuzzy`: Use approximate matching for make/model/trim.  Default is false.
 
 `callback` is called with `callback(err, results)` where  `results` is an array of vehicles containing `year, make, model, trim` fields.
 

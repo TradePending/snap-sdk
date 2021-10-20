@@ -74,7 +74,7 @@ $(document).ready(function(){
 
   snap.set_api_url(apiUrl);
   snap.set_es_url(esUrl);
-  snap.configure(partnerId, "input#vehicle", function(err, vehicle) {
+  snap.configure_with_options({partner_id: partnerId, css_selector: "input#vehicle", fuzzy: true}, function(err, vehicle) {
     if (err) {
       console.log(err);
       return alert(err);
