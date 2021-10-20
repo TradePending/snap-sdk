@@ -5,8 +5,8 @@ const webpack = require('gulp-webpack');
 const webpackOrig = require('webpack');
 remoteSrc = require('gulp-remote-src');
 
-// const pluginUrlBase = 'https://cdnjs.tradepending.com/javascript/';
-const pluginUrlBase = 'http://localhost.tradepending.com:8080/javascript/';
+const pluginUrlBase = 'https://cdnjs.tradepending.com/javascript/';
+// const pluginUrlBase = 'http://localhost.tradepending.com:8080/javascript/';
 
 
 const umdOptions = {
