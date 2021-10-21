@@ -11098,7 +11098,8 @@
 	        name: "vehicle-search",
 	        displayKey: "ymmt",
 	        source: function(query, callback) {
-	          var current_year, q;
+	          var current_year, q, fuzziness;
+	          fuzziness = 'AUTO:5,8';
 	          if (ymm_only) {
 	            q = {
 	              query: {
@@ -11129,7 +11130,7 @@
 	              }
 	            };
 	            if (fuzzy) {
-	              q.query.bool.must.match.ymm.fuzziness = 'AUTO:5,8'
+	              q.query.bool.must.match.ymm.fuzziness = fuzziness;
 	            }
 	          } else {
 	            q = {
@@ -11148,7 +11149,7 @@
 	              }
 	            };
 	            if (fuzzy) {
-	              q.query.bool.must.match.all_fields.fuzziness = 'AUTO:5,8'
+	              q.query.bool.must.match.all_fields.fuzziness = fuzziness;
 	            }
 	          }
 	          

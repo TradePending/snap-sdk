@@ -29,13 +29,14 @@ var SNAPes;
       }, callback);
     },
     search_with_options: function(options, callback) {
-      var partner_id, country, current_year, include_new_cars, query, search_term, xhr, ymm_only, fuzzy;
+      var partner_id, country, current_year, include_new_cars, query, search_term, xhr, ymm_only, fuzzy, fuzziness;
       partner_id = options.partner_id;
       search_term = options.search_term;
       include_new_cars = options.include_new_cars;
       country = options.country;
       ymm_only = options.ymm_only;
       fuzzy = options.fuzzy;
+      fuzziness = 'AUTO:5,8';
       if (typeof callback !== 'function') {
         return callback(new Error("callback function is required"));
       }
@@ -72,7 +73,7 @@ var SNAPes;
           }
         };
         if (fuzzy) {
-          q.query.bool.must.match.ymm.fuzziness = 'AUTO:5,8'
+          q.query.bool.must.match.ymm.fuzziness = fuzziness;
         }
       } else {
         query = {
@@ -91,7 +92,7 @@ var SNAPes;
           }
         };
         if (fuzzy) {
-          q.query.bool.must.match.all_fields.fuzziness = 'AUTO:5,8'
+          q.query.bool.must.match.all_fields.fuzziness = fuzziness;
         }
       }
       if (!include_new_cars) {
