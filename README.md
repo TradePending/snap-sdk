@@ -9,6 +9,8 @@ This javascript interface to TradePending's partner API.  **You must have a part
 * The `callback` provided to `SNAP.configure` and `SNAP.configure_with_options` now is called with `callback(err, vehicle)` instead of `callback(error_or_vehicle_guess_which)` for consistency and usability.  Other functions like `SNAP.next_attribute` already functioned this way since v3.
 
 # ChangeLog
+## v4.0.6
+Better support for Canadian vehicle selection.
 ## v4.0.4
 Added `fuzzy` option to allow typos in search.
 

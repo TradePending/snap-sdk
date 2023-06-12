@@ -11044,7 +11044,6 @@
 	var SNAP;
 	(function() {
 	  var build_report_params;
-
 	  SNAP = {
 	    snap_api_url: "https://snap-api.tradepending.com",
 	    elasticsearch_url: 'https://snap-api.tradepending.com/api/v4/search',
@@ -11075,6 +11074,7 @@
 	      css_selector = options.css_selector;
 	      include_new_cars = options.include_new_cars;
 	      country = options.country;
+	      SNAP._country = country;
 	      ymm_only = options.ymm_only;
 	      fuzzy = options.fuzzy;
 	      if (!partner_id) {
@@ -11210,7 +11210,7 @@
 	                  id: v.id,
 	                  year: v.year,
 	                  make: v.make,
-	                  model: v.model
+	                  model: v.model,
 	                };
 	                ymmt = v.ymm;
 	                if (!ymm_only) {
@@ -11244,7 +11244,9 @@
 	        return callback(new Error("callback function is required"));
 	      }
 	      vehicle.partner_id = partner_id;
-	      url = ("" + this.snap_api_url + "/api/v4/select?") + $.param(vehicle);
+	      var options = Object.assign({}, vehicle);
+	      options.country = SNAP._country;
+	      url = ("" + this.snap_api_url + "/api/v4/select?") + $.param(options);
 	      return $.getJSON(url, function(response) {
 	        var v;
 	        v = {};
@@ -11360,7 +11362,6 @@
 	    return params;
 	  };
 	}).call(this);
-
 	return SNAP;
 	}));
 
