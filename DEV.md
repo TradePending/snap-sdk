@@ -3,7 +3,7 @@ Overview:
 
 ## Build
 
-`gulp build`
+`npx gulp build`
 
 1. Pulls down the `snap-typeahead-v4.js`, `typeahead.js`, and `snap-search.js` from the production plugin server.
 
