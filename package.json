@@ -22,13 +22,17 @@
     "minimist": "^1.2.8",
     "npm-force-resolutions": "^0.0.10"
   },
+  "overrides": {
+    "form-data": "^4.0.0"
+  },
   "resolutions": {
     "braces": "^3.0.2",
     "loader-utils": "^1.4.2",
     "glob-parent": "^5.1.2",
     "lodash.template": "^4.5.0",
     "minimist": "^1.2.5",
-    "json": "^1.0.2"
+    "json": "^1.0.2",
+    "form-data": "^4.0.0"
   },
   "scripts": {
     "preinstall": "npx npm-force-resolutions"
