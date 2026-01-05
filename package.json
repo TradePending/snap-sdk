@@ -28,7 +28,8 @@
     "glob-parent": "^5.1.2",
     "lodash.template": "^4.5.0",
     "minimist": "^1.2.5",
-    "json": "^1.0.2"
+    "json": "^1.0.2",
+    "sha.js": ">=2.4.12"
   },
   "scripts": {
     "preinstall": "npx npm-force-resolutions"
