@@ -12,25 +12,16 @@
     "jquery": "^3.7.0"
   },
   "devDependencies": {
-    "braces": "^3.0.2",
+    "braces": "^3.0.3",
     "gulp": "^4.0.2",
     "gulp-remote-src": "^0.4.4",
     "gulp-rename": "^2.0.0",
     "gulp-umd": "^2.0.0",
     "gulp-webpack": "^1.5.0",
     "lodash.escape": "^4.0.1",
-    "minimist": "^1.2.8",
-    "npm-force-resolutions": "^0.0.10"
+    "minimist": "^1.2.8"
   },
-  "resolutions": {
-    "braces": "^3.0.2",
-    "loader-utils": "^1.4.2",
-    "glob-parent": "^5.1.2",
-    "lodash.template": "^4.5.0",
-    "minimist": "^1.2.5",
-    "json": "^1.0.2"
-  },
-  "scripts": {
-    "preinstall": "npx npm-force-resolutions"
+  "overrides": {
+    "form-data": "2.5.5"
   }
 }
