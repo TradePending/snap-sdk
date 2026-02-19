@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "braces": "^3.0.3",
-    "gulp": "^4.0.2",
+    "gulp": "^5.0.1",
     "gulp-remote-src": "^0.4.4",
     "gulp-rename": "^2.0.0",
     "gulp-umd": "^2.0.0",
